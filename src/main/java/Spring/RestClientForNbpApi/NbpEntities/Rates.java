@@ -1,4 +1,4 @@
-package Spring.NbpEntities;
+package Spring.RestClientForNbpApi.NbpEntities;
 
 public class Rates {
 

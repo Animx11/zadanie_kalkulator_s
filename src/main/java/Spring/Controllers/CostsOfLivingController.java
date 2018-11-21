@@ -2,6 +2,7 @@ package Spring.Controllers;
 
 import Spring.Entities.CostsOfLiving;
 import Spring.Services.CostsOfLivingService;
+import Spring.RestClientForNbpApi.RestTemplateGetCurrencyValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api")
@@ -18,8 +20,11 @@ public class CostsOfLivingController {
     @Autowired
     private CostsOfLivingService costsOfLivingService;
 
+    private RestTemplateGetCurrencyValue restTemplateGetCurrencyValue;
+
     @RequestMapping(value = "/costsOfLiving/countryName", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<CostsOfLiving> getByCountryName(@RequestParam("countryName") String countryName) {
+    public Iterable<CostsOfLiving> getByCountryName(@RequestParam("countryName") String countryName) throws IOException {
+        restTemplateGetCurrencyValue.getCurrencyValue('A', "USD");
         return costsOfLivingService.getByCountryName(countryName);
     }
 

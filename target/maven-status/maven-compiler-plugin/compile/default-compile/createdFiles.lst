@@ -1,3 +1,9 @@
-Spring\Main.class
+Spring\Templates\RestTemplateGetCurrencyValue.class
 Spring\Entities\CostsOfLiving.class
-Spring\Repositories\CostOfLivingRepository.class
+Spring\Services\CostsOfLivingService.class
+Spring\Repositories\CostsOfLivingRepository.class
+Spring\Templates\Deserialization.class
+Spring\Services\CostsOfLibingServicesImplementation.class
+Spring\Controllers\CostsOfLivingController.class
+Spring\Main.class
+Spring\Templates\Currency.class
