@@ -49,11 +49,32 @@ public class CostsOfLivingController {
         char currencyTable = costsOfLivingService.getCurrencyTableForCountry(countryName);
         String currencyCode = costsOfLivingService.getCurrencyCodeForCountry(countryName);
 
-        float currencyValue = restTemplateGetCurrencyValue.getCurrencyValue(currencyTable, currencyCode);
+        float currencyValue;
+
+        if(currencyCode != null) {
+            currencyValue = restTemplateGetCurrencyValue.getCurrencyValue(currencyTable, currencyCode);
+        }
+        else{
+            currencyValue = 1.0f;
+        }
 
         float incomeTax = costsOfLivingService.getIncomeTaxForCountry(countryName);
         int fixedCosts = costsOfLivingService.getFixedCostsForCountry(countryName);
 
         return earningsCalculator.calculateEmployeeEarning(currencyValue, incomeTax, fixedCosts, dailyEarnings);
+    }
+
+    @RequestMapping(value = "/costsOfLiving/init", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
+    public String init(){
+
+        CostsOfLiving uk = new CostsOfLiving("UK", 0.25f, 600, "GBP", 'A');
+        CostsOfLiving de = new CostsOfLiving("Germany", 0.2f, 800, "EUR", 'A');
+        CostsOfLiving pl = new CostsOfLiving("Poland", 0.19f, 1200);
+
+        costsOfLivingService.save(uk);
+        costsOfLivingService.save(de);
+        costsOfLivingService.save(pl);
+
+        return "Initialized costs of living";
     }
 }

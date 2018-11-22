@@ -1,9 +1,11 @@
-Spring\Templates\RestTemplateGetCurrencyValue.class
-Spring\Entities\CostsOfLiving.class
-Spring\Services\CostsOfLivingService.class
-Spring\Repositories\CostsOfLivingRepository.class
-Spring\Templates\Deserialization.class
+Spring\RestClientForNbpApi\NbpEntities\Currency.class
 Spring\Services\CostsOfLibingServicesImplementation.class
 Spring\Controllers\CostsOfLivingController.class
+Spring\RestClientForNbpApi\NbpEntities\Rates.class
 Spring\Main.class
-Spring\Templates\Currency.class
+Spring\RestClientForNbpApi\RestTemplateGetCurrencyValue.class
+Spring\Repositories\CostsOfLivingRepository.class
+Spring\Entities\CostsOfLiving.class
+Spring\Services\CostsOfLivingService.class
+Spring\RestClientForNbpApi\Deserialization.class
+Spring\Calculators\EarningsCalculator.class

@@ -30,6 +30,12 @@ public class CostsOfLiving {
     public CostsOfLiving() {
     }
 
+    public CostsOfLiving(String countryName, float incomeTax, int fixedCosts) {
+        this.countryName = countryName;
+        this.incomeTax = incomeTax;
+        this.fixedCosts = fixedCosts;
+    }
+
     public CostsOfLiving(String countryName, float incomeTax, int fixedCosts, String currencyCode, char currencyTable) {
         this.countryName = countryName;
         this.incomeTax = incomeTax;
