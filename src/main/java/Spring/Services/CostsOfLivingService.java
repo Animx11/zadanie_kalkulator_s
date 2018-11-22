@@ -8,4 +8,9 @@ public interface CostsOfLivingService {
     void delete(String countryName);
 
     Iterable<CostsOfLiving> getByCountryName(String countryName);
+    char getCurrencyTableForCountry(String countryName);
+    String getCurrencyCodeForCountry(String countryName);
+    float getIncomeTaxForCountry(String countryName);
+    int getFixedCostsForCountry(String countryName);
+
 }

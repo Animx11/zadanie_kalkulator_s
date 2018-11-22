@@ -19,15 +19,23 @@ public class CostsOfLiving {
     @Column(name = "Fixed_costs")
     private int fixedCosts;
 
+    @Column(name = "Currency_code")
+    private String currencyCode;
+
+    @Column(name = "Currency_table")
+    private char currencyTable;
+
     //Constructors
 
     public CostsOfLiving() {
     }
 
-    public CostsOfLiving(String countryName, float incomeTax, int fixedCosts) {
+    public CostsOfLiving(String countryName, float incomeTax, int fixedCosts, String currencyCode, char currencyTable) {
         this.countryName = countryName;
         this.incomeTax = incomeTax;
         this.fixedCosts = fixedCosts;
+        this.currencyCode = currencyCode;
+        this.currencyTable = currencyTable;
     }
 
     //Getters and setters
@@ -55,5 +63,21 @@ public class CostsOfLiving {
 
     public void setFixedCosts(int fixedCosts) {
         this.fixedCosts = fixedCosts;
+    }
+
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
+    }
+
+    public char getCurrencyTable() {
+        return currencyTable;
+    }
+
+    public void setCurrencyTable(char currencyTable) {
+        this.currencyTable = currencyTable;
     }
 }

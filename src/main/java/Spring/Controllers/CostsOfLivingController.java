@@ -1,5 +1,6 @@
 package Spring.Controllers;
 
+import Spring.Calculators.EarningsCalculator;
 import Spring.Entities.CostsOfLiving;
 import Spring.Services.CostsOfLivingService;
 import Spring.RestClientForNbpApi.RestTemplateGetCurrencyValue;
@@ -22,9 +23,10 @@ public class CostsOfLivingController {
 
     private RestTemplateGetCurrencyValue restTemplateGetCurrencyValue;
 
+    private EarningsCalculator earningsCalculator = new EarningsCalculator();
+
     @RequestMapping(value = "/costsOfLiving/countryName", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public Iterable<CostsOfLiving> getByCountryName(@RequestParam("countryName") String countryName) throws IOException {
-        restTemplateGetCurrencyValue.getCurrencyValue('A', "USD");
+    public Iterable<CostsOfLiving> getByCountryName(@RequestParam("countryName") String countryName) {
         return costsOfLivingService.getByCountryName(countryName);
     }
 
@@ -39,5 +41,19 @@ public class CostsOfLivingController {
     public ResponseEntity<CostsOfLiving> create(@RequestBody @Valid @NotNull CostsOfLiving costsOfLiving) {
         costsOfLivingService.save(costsOfLiving);
         return ResponseEntity.ok().body(costsOfLiving);
+    }
+
+    @RequestMapping(value = "/costsOfLiving/getCurrency", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public float getCountryCurrency(@RequestParam("countryName") String countryName, @RequestParam("dailyEarnings") float dailyEarnings) throws IOException {
+
+        char currencyTable = costsOfLivingService.getCurrencyTableForCountry(countryName);
+        String currencyCode = costsOfLivingService.getCurrencyCodeForCountry(countryName);
+
+        float currencyValue = restTemplateGetCurrencyValue.getCurrencyValue(currencyTable, currencyCode);
+
+        float incomeTax = costsOfLivingService.getIncomeTaxForCountry(countryName);
+        int fixedCosts = costsOfLivingService.getFixedCostsForCountry(countryName);
+
+        return earningsCalculator.calculateEmployeeEarning(currencyValue, incomeTax, fixedCosts, dailyEarnings);
     }
 }

@@ -28,5 +28,24 @@ public class CostsOfLibingServicesImplementation implements CostsOfLivingService
         return costsOfLivingRepository.findByCountryName(countryName);
     }
 
+    @Override
+    public char getCurrencyTableForCountry(String countryName){
+        return costsOfLivingRepository.findCurrencyTableForCountry(countryName);
+    }
+
+    @Override
+    public String getCurrencyCodeForCountry(String countryName){
+        return costsOfLivingRepository.findCurrencyCodeForCountry(countryName);
+    }
+
+    @Override
+    public float getIncomeTaxForCountry(String countryName){
+        return costsOfLivingRepository.findIncomeTaxForCountry(countryName);
+    }
+
+    @Override
+    public int getFixedCostsForCountry(String countryName){
+        return costsOfLivingRepository.findFixedCostsForCountry(countryName);
+    }
 
 }
